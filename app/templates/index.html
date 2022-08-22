@@ -1,0 +1,195 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Учет смен сторожей</title>
+    <style type="text/css">
+   body{
+  background-color: #FAEBD7;
+  font-size: 20px;
+}
+.string{
+  display: flex;
+  flex-direction: row;
+}
+button, input, select{
+  margin: 0 10px;
+  height: 40px;
+}
+
+.block{
+  border: black solid 2px;
+}
+.mini-block{
+  border: black solid 2px;
+  margin: 5px;
+}
+h3{
+  margin: 5px;
+}
+p{
+  margin: 2px;
+  padding: 2px;
+}
+input, select {
+  width: 10vw;
+}
+  </style>
+  </head>
+  <body>
+    <div class="block ">
+
+    <h3>Начало смены</h3>
+    <div class="string">
+      <div class="string mini-block">
+        <form class="string" action="{{ url_for('openShift') }}" method="post">
+        <p>Выберите сотрудника:</p>
+           <select  id="security" name="personName">
+               <option>Туманов Александр Юрьевич</option>
+               <option>Громов Сергей Владимирович</option>
+               <option>Колесник Светлана Владимировна</option>
+               <option>Крылов Андрей Юрьевич</option>
+           </select>
+           <p>Выберите температуру:</p>
+           <select id="temperature" name="temperature">
+               <option>36.6</option>
+               <option>Выше</option>
+               <option>Ниже</option>
+           </select>
+
+           <input type="submit" name="open" value="Открыть смену">
+            <input type="submit" name="close" value="Закрыть смену">
+          </form>
+        </div>
+    </div>
+    </div>
+    <p> </p>
+
+    <div class="block">
+    <h3>Запись сотрудников</h3>
+    <div class="string">
+
+        <form class="string mini-block" action="{{ url_for('addNote') }}" method="post">
+
+         <p>Выберите сотрудника:</p>
+           <select id="employee2" name="personName">
+               {% for stf in staff %}
+                <option>{{ stf }}</option>
+               {% endfor %}
+           </select>
+
+           <p>Выберите температуру:</p>
+           <select id="temperature2" name="temperature">
+               <option>36.6</option>
+               <option>Выше</option>
+               <option>Ниже</option>
+           </select>
+
+           <input type="submit" name="come" value="Сотрудник пришел">
+            <input type="submit" name="left" value="Сотрудник ушел">
+          </form>
+
+
+      </div>
+    </div>
+
+
+    <p></p>
+
+    <div class="block">
+
+    <h3>Учет ключей</h3>
+    <div class="string">
+
+        <form class="string mini-block" action="{{ url_for('takeKey') }}" method="post">
+
+          <p>Выберите сотрудника:</p>
+           <select id="employee4" name="personName">
+               {% for stf in staff %}
+                <option>{{ stf }}</option>
+               {% endfor %}
+           </select>
+
+           <p>Выберите помещение:</p>
+           <select name="kvantum">
+               {% for key in keys %}
+                <option>{{ key }}</option>
+               {% endfor %}
+           </select>
+
+           <input type="submit" name="" value="Сотрудник взял ключ">
+
+          </form>
+
+      </div>
+
+      <p> </p>
+      <div class="string">
+
+          <form class="string mini-block" action="{{ url_for('backKey') }}" method="post">
+             <p>Выберите помещение:</p>
+             <select name="back">
+                 {% for key in keys %}
+                <option>{{ key }}</option>
+               {% endfor %}
+             </select>
+             <input type="submit" name="" value="Ключ сдан">
+           </form>
+
+      </div>
+
+        <form class="string" action="{{ url_for('aboutKeys') }}" method="get">
+            <input type="submit" name="" value="Информация о ключах">
+        </form>
+
+    </div>
+
+    <p></p>
+
+
+    <div class="block">
+
+    <h3>Учет посетителей</h3>
+    <div class="string">
+            <div class="string mini-block">
+
+            <form class="string" action="{{ url_for('addGuest') }}" method="post">
+
+              <p>ФИО гостя</p>
+              <input type="text" name="gCome" value="">
+
+               <p>Выберите температуру:</p>
+               <select id="temperature3">
+               <option>36.6</option>
+               <option>Выше</option>
+               <option>Ниже</option>
+           </select>
+
+               <input type="submit" value="Добавить посетителя">
+
+            </form>
+
+            </div>
+
+       </div>
+      <div class="string">
+
+          <form class="string mini-block" action="{{ url_for('deleteGuest') }}" method="post">
+
+            <p>ФИО гостя</p>
+            <select name="guests">
+              {% for guest in guests %}
+                <option>{{ guest }}</option>
+        {% endfor %}
+                </select>
+
+            <input type="submit" name="gLeft" value="Посетитель ушел">
+
+          </form>
+
+      </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>

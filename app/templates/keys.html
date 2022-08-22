@@ -1,0 +1,19 @@
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Учет смен сторожей</title>
+      </head>
+  <body>
+
+  <ul>
+            {% for key in keys %}
+            <li>{{ key.kvantum }}
+                {% if key.taken %}
+                {{ key.who }}
+                {% endif %}
+            </li>
+            {% endfor %}
+  </ul>
+
+  </body>
+</html>
